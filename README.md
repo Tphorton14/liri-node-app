@@ -1,4 +1,4 @@
-![Image of Yaktocat](https://octodex.github.com/images/pic1.png)
+![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/pic1.PNG)
 
 
 
