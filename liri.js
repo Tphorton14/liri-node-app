@@ -30,6 +30,43 @@ switch (action) {
         doWhatItSays();
         break;
 
+        function doWhatItSays() {
+            fs.readFile('random.txt', 'utf-8',function (err,data) {
+        
+                if (err) {
+                    return console.log(err);
+                }
+        
+        
+                const dataArr = data.split(",");
+        
+                if ("spotify-this-song") {
+                    const songcheck = dataArr[1].trim().slice(1, -1);
+                    spotifyThisSong(songcheck);
+                }
+                else if ("concert-this") {
+                    if ("") {
+                        const dataLength = dataArr[1].length - 1;
+                        let data = dataArr[1].substring(2, dataLength);
+                        console.log(data);
+                        concertThis(data);
+                    }
+                    else {
+                        const bandName = dataArr[1].trim();
+                        console.log(bandName);
+                        concertThis(bandName);
+                    }
+        
+                }
+                else if (dataArr[0] === "movie-this") {
+                    const movie_name = dataArr[1].trim().slice(1, -1);
+                    movieThis(movie_name);
+                }
+        
+            });
+        
+        };
+
     default:
         display("Please type in a valid command...");
         break;
@@ -94,39 +131,39 @@ function movieThis() {
 };
 
 
-function doWhatItSays() {
-    fs.readFile('random.txt', 'utf-8',function (err,data) {
+// function doWhatItSays() {
+//     fs.readFile('random.txt', 'utf-8',function (err,data) {
 
-        if (err) {
-            return console.log(err);
-        }
+//         if (err) {
+//             return console.log(err);
+//         }
 
 
-        const dataArr = data.split(",");
+//         const dataArr = data.split(",");
 
-        if ("spotify-this-song") {
-            const songcheck = dataArr[1].trim().slice(1, -1);
-            spotifyThisSong(songcheck);
-        }
-        else if ("concert-this") {
-            if ("") {
-                const dataLength = dataArr[1].length - 1;
-                let data = dataArr[1].substring(2, dataLength);
-                console.log(data);
-                concertThis(data);
-            }
-            else {
-                const bandName = dataArr[1].trim();
-                console.log(bandName);
-                concertThis(bandName);
-            }
+//         if ("spotify-this-song") {
+//             const songcheck = dataArr[1].trim().slice(1, -1);
+//             spotifyThisSong(songcheck);
+//         }
+//         else if ("concert-this") {
+//             if ("") {
+//                 const dataLength = dataArr[1].length - 1;
+//                 let data = dataArr[1].substring(2, dataLength);
+//                 console.log(data);
+//                 concertThis(data);
+//             }
+//             else {
+//                 const bandName = dataArr[1].trim();
+//                 console.log(bandName);
+//                 concertThis(bandName);
+//             }
 
-        }
-        else if (dataArr[0] === "movie-this") {
-            const movie_name = dataArr[1].trim().slice(1, -1);
-            movieThis(movie_name);
-        }
+//         }
+//         else if (dataArr[0] === "movie-this") {
+//             const movie_name = dataArr[1].trim().slice(1, -1);
+//             movieThis(movie_name);
+//         }
 
-    });
+//     });
 
-};
+// };
