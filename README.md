@@ -1,5 +1,4 @@
-
-
+![Image of Yaktocat](https://octodex.github.com/images/pic1.png)
 
 
 
