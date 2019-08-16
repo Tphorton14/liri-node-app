@@ -3,11 +3,13 @@ const fs = require('fs');
 const Spotify = require('node-spotify-api');
 const request = require('request');
 
+const moment = require("moment");
+
 
 const keys = require("./keys.js");
 const spotify = new Spotify(keys.spotify);
 
-var action = process.argv[2];
+const action = process.argv[2];
 let parameter = process.argv[3];
 
 
@@ -34,51 +36,24 @@ switch (action) {
 };
 
 
-function concertThis(parameter) {
+function concertThis(body) {
 
-    if ('concert-this') {
-        var artist = "";
-        for (let i = 3; i < process.argv.length; i++) {
-            artist =+ process.argv[i];
-        }
-        console.log(artist);
-    } else {
-        artist = parameter;
-    }
+    var artist = "";
+    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp", function (err, action) {
 
-
-    var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
-
-
-
-    request(queryUrl, function (err, res, body) {
-
-        if (!err && res.statusCode === 200) {
-
+        if ('concert-this') {
             const parse = JSON.parse(body);
-            for (i = 0; i < parse.length; i++) {
-                const dTime = parse[i].datetime;
-                const month = dTime.substring(5, 7);
-                const year = dTime.substring(0, 4);
-                const day = dTime.substring(8, 10);
-                const dateForm = month + "/" + day + "/" + year
-
-                logIt("\n---------------------------------------------------\n");
-
-
-                logIt("Date: " + dateForm);
-                logIt("Name: " + parse[i].venue.name);
-                logIt("City: " + parse[i].venue.city);
-                if (parse[i].venue.region !== "") {
-                    logIt("Country: " + parse[i].venue.region);
-                }
-                logIt("Country: " + parse[i].venue.country);
-                logIt("\n---------------------------------------------------\n");
-
+            for (let i = 0; i < parse.length; i++) {
+                
+                console.log("Venue Name: " + parse[i].venue.name);
+                console.log("Location: " + parse[i].venue.city + ", " + parse[i].venue.region);
+                const formatTime = moment(parse[i].datetime, "YYYY-MM-DD HH:mm:ss").format("MM-DD-YYYY");
+                console.log("Date: " + formatTime);
             }
         }
+        
+        console.log(concertThis(action));
     });
-
 }
 
 
