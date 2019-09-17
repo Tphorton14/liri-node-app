@@ -7,7 +7,7 @@ const moment = require("moment");
 
 
 const keys = require("./keys.js");
-const spotify = new Spotify(keys.spotify);
+const spotify = new Spotify(keys);
 
 const action = process.argv[2];
 let parameter = process.argv[3];
@@ -30,66 +30,23 @@ switch (action) {
         doWhatItSays();
         break;
 
-        function doWhatItSays() {
-            fs.readFile('random.txt', 'utf-8',function (err,data) {
-        
-                if (err) {
-                    return console.log(err);
-                }
-        
-        
-                const dataArr = data.split(",");
-        
-                if ("spotify-this-song") {
-                    const songcheck = dataArr[1].trim().slice(1, -1);
-                    spotifyThisSong(songcheck);
-                }
-                else if ("concert-this") {
-                    if ("") {
-                        const dataLength = dataArr[1].length - 1;
-                        let data = dataArr[1].substring(2, dataLength);
-                        console.log(data);
-                        concertThis(data);
-                    }
-                    else {
-                        const bandName = dataArr[1].trim();
-                        console.log(bandName);
-                        concertThis(bandName);
-                    }
-        
-                }
-                else if (dataArr[0] === "movie-this") {
-                    const movie_name = dataArr[1].trim().slice(1, -1);
-                    movieThis(movie_name);
-                }
-        
-            });
-        
-        };
-
     default:
         display("Please type in a valid command...");
         break;
 };
 
 
-function concertThis(body) {
+function concertThis(artist) {
 
-    var artist = "";
-    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp", function (err, action) {
+    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp", function (err, response, body) {
 
-        if ('concert-this') {
-            const parse = JSON.parse(body);
-            for (let i = 0; i < parse.length; i++) {
-                
-                console.log("Venue Name: " + parse[i].venue.name);
-                console.log("Location: " + parse[i].venue.city + ", " + parse[i].venue.region);
-                const formatTime = moment(parse[i].datetime, "YYYY-MM-DD HH:mm:ss").format("MM-DD-YYYY");
-                console.log("Date: " + formatTime);
-            }
+        const parse = JSON.parse(body);
+        for (let i = 0; i < parse.length; i++) {
+            console.log("Venue Name: " + parse[i].venue.name);
+            console.log("Location: " + parse[i].venue.city + ", " + parse[i].venue.region);
+            const formatTime = moment(parse[i].datetime, "YYYY-MM-DD HH:mm:ss").format("MM-DD-YYYY");
+            console.log("Date: " + formatTime);
         }
-        
-        console.log(concertThis(action));
     });
 }
 
@@ -98,16 +55,18 @@ function concertThis(body) {
 
 
 function spotifyThisSong(name) {
-    spotify.search({ type: 'track', query: name, limit: 1 }).then(function (err, data) {
+    spotify.search({ type: "track", query: name, limit: 1 }).then(function (data) {
+        console.log(data);
         console.log('Artist: ' + data.tracks.items[0].artists[0].name);
         console.log('Song: ' + data.tracks.items[0].name);
         console.log('Album: ' + data.tracks.items[0].album.name);
         console.log('Spotify Link: ' + data.tracks.items[0].preview_url);
 
-    }).catch(function (err, data) {
-        console.log('Artist: Ace of Base');
-        console.log('Song: The Sign');
-        console.log('Album: The Sign');
+    }).catch(function (err) {
+        // console.log('Artist: Ace of Base');
+        // console.log('Song: The Sign');
+        // console.log('Album: The Sign');
+        console.log(err);
     });
 };
 
@@ -131,39 +90,19 @@ function movieThis() {
 };
 
 
-// function doWhatItSays() {
-//     fs.readFile('random.txt', 'utf-8',function (err,data) {
+function doWhatItSays() {
+    fs.readFile('random.txt', "utf-8",function (err,data) {
 
-//         if (err) {
-//             return console.log(err);
-//         }
+        if(err) {
+            return console.log(err);
+        }
 
+        const randomText = data.split(",");
 
-//         const dataArr = data.split(",");
+        for (let i = 0; i < randomText.length; i++) {
+            console.log(randomText[i]);
+        }
 
-//         if ("spotify-this-song") {
-//             const songcheck = dataArr[1].trim().slice(1, -1);
-//             spotifyThisSong(songcheck);
-//         }
-//         else if ("concert-this") {
-//             if ("") {
-//                 const dataLength = dataArr[1].length - 1;
-//                 let data = dataArr[1].substring(2, dataLength);
-//                 console.log(data);
-//                 concertThis(data);
-//             }
-//             else {
-//                 const bandName = dataArr[1].trim();
-//                 console.log(bandName);
-//                 concertThis(bandName);
-//             }
+    });
 
-//         }
-//         else if (dataArr[0] === "movie-this") {
-//             const movie_name = dataArr[1].trim().slice(1, -1);
-//             movieThis(movie_name);
-//         }
-
-//     });
-
-// };
+};
