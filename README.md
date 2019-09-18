@@ -1,5 +1,5 @@
 ![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/pic1.PNG)
-![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/pic2.JPG)
+![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/spot.JPG)
 ![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/pic3.JPG)
 ![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/do.JPG)
 
