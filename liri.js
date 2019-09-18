@@ -31,7 +31,7 @@ switch (action) {
         break;
 
     default:
-        display("Please type in a valid command...");
+        console.log("Please type in a valid command...");
         break;
 };
 
@@ -91,6 +91,7 @@ function movieThis() {
 
 
 function doWhatItSays() {
+                            // reading plain text
     fs.readFile('random.txt', "utf-8",function (err,data) {
 
         if(err) {
@@ -98,10 +99,33 @@ function doWhatItSays() {
         }
 
         const randomText = data.split(",");
+        
 
-        for (let i = 0; i < randomText.length; i++) {
-            console.log(randomText[i]);
-        }
+      const parameter = randomText[1];
+      
+
+        switch (randomText[0]) {
+            
+                case "concert-this":
+                    concertThis(parameter);
+                    break;
+            
+                case "spotify-this-song":
+                    spotifyThisSong(parameter);
+                    break;
+            
+                case "movie-this":
+                    movieThis(parameter);
+                    break;
+            
+                case "do-what-it-says":
+                    doWhatItSays();
+                    break;
+            
+                default:
+                    console.log("Please type in a valid command...");
+                    break;
+            };
 
     });
 
