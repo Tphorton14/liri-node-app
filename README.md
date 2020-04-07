@@ -20,6 +20,7 @@ Name of the Venue
 Location of the Venue
 
 Date of the Event
+
 ![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/concert.JPG)
 
 
