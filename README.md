@@ -22,6 +22,7 @@ Location of the Venue
 Date of the Event
 ![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/concert.JPG)
 
+
 node liri spotify-this-song 'song name' This will show the following about the song in your terminal/bash window:
 
 Artist(s)
