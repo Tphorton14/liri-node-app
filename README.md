@@ -35,7 +35,7 @@ Album of the Song
 Song Preview Link
 ![Image of Yaktocat](https://github.com/Tphorton14/liri-node-app/blob/master/images/spot.JPG)
 
-node liri.js omdb 'movie name' This will output the following information to your terminal/bash window:
+node liri.js movie-this 'movie name' This will output the following information to your terminal/bash window:
 
 Title of the Movie
 
