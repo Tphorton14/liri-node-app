@@ -12,6 +12,7 @@ do-what-it-says
 
 # Running the following commands in your terminal will do the following:
 node liri.js concert-this 'concert or band name'
+
 This will show the following information about each event to your terminal/bash window:
 
 Name of the Venue
