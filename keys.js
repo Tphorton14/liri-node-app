@@ -7,7 +7,3 @@ const Spotify = {
 
 module.exports = Spotify;
 
-// module.exports = {
-//     spotify: exports.spotify,
-    
-// };
